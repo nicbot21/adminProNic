@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule,  CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { ChartsModule } from 'ng2-charts';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
@@ -21,6 +22,7 @@ import { ChartsModule } from 'ng2-charts';
         Graficas1Component,
         IncrementadorComponent,
         GraficoDonaComponent,
+        AccountSettingsComponent,
         
         
     ],
@@ -35,7 +37,7 @@ import { ChartsModule } from 'ng2-charts';
      SharedModule,
      PAGES_ROUTES,
      FormsModule,
-     ChartsModule
+     ChartsModule,
     ]
 })
 

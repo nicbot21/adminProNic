@@ -5,6 +5,7 @@ Email: niravjoshi87@gmail.com
 File: js
 */
 
+//funcion para llamar desde angular!!!!!!!!!!!!!! SIDEBAR
 function init_plugins() {
 
     $(function() {
