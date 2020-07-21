@@ -6,8 +6,7 @@ export class Usuario {
         public password: string,
         public img?: string, //interrogacion es como valor opcional
         public role?: string,
-        public google?: string,
+        public google?: boolean,
         public _id?: string
-
     ){}
 }

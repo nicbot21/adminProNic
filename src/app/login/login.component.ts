@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   recuerdame: boolean = false;
   auth2: any;
 
-  constructor( 
+  constructor(
     public router: Router,
     public _usuarioService: UsuarioService
     ) { }
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       this.recuerdame = true;
     }
   }
-  
+
   googleInit(){
     gapi.load('auth2', ( ) => {
       this.auth2 = gapi.auth2.init({
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
 
   ingresar( forma: NgForm ){
 
-    if( forma.invalid){
+    if( forma.invalid ){
       return;
     }
 
@@ -79,16 +79,14 @@ export class LoginComponent implements OnInit {
 
                           this.router.navigate(['/dashboard']);
                           console.log( 'resps:', correcto);
+                          console.log('regresar usuario al ingresar - ingresar2:', usuario);
                         });
-    
-  // console.log("ingresando :: sale forma valid: ", forma.valid);
-  //console.log("ingresando :: sale forma value: ", forma.value);
+
+   console.log("ingresando :: sale forma valid: ", forma.valid);
+   console.log("ingresando :: sale forma value: ", forma.value);
   //this.router.navigate(['/dashboard']);
   }
 
-  registrarse(){
-    
-  }
 
 
 }

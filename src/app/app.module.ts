@@ -17,6 +17,7 @@ import { PagesModule } from './pages/pages.module';
 
 //temporal
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import { ImagenPipe } from './pipes/imagen.pipe';
 
 
 
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    //ImagenPipe,
   ],
   imports: [
     BrowserModule,

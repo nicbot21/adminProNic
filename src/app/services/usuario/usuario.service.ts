@@ -16,7 +16,10 @@ export class UsuarioService {
   usuario: Usuario;
   token: String;
 
-  constructor(public http: HttpClient, public router: Router) {
+  constructor(
+    public http: HttpClient,
+     public router: Router
+     ) {
     console.log('Service ok');
     this.cargarStorage();
   }
@@ -29,7 +32,8 @@ export class UsuarioService {
     if (localStorage.getItem('token')) {
       var user = JSON.stringify(this.usuario); // no pasa hay error - usuario undefined
       this.token = localStorage.getItem('token');
-     // this.usuario = JSON.parse(localStorage.getItem('usuario'));// corregir!!!!!!!!
+      this.usuario = JSON.parse(localStorage.getItem('usuario'));// corregir!!!!!!!!
+     console.log('verificar usuario en usuario.service: - cargarUsuario', this.usuario)
     } else {
       this.token = '';
       this.usuario = null;
@@ -70,12 +74,13 @@ export class UsuarioService {
 
     return this.http.post(url, { token }).pipe(
       map((respo: any) => {
-        this.guardarStorage(respo.id, respo.token, respo.suario);
+        this.guardarStorage(respo.id, respo.token, respo.usuario);
       })
     );
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
+
     if (recordar) {
       localStorage.setItem('email', usuario.email);
     } else {
@@ -84,10 +89,13 @@ export class UsuarioService {
     let url = URL_SERVICES + '/login';
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
-        this.guardarStorage(resp.id, resp.token, resp.suario);
+        this.guardarStorage(resp.id, resp.token, resp.usuario);
+        console.log('recibiendo usuario de usuario.service - login: ', resp);
         return true;
       })
+
     );
+
   }
 
   crearUsuario(usuario: Usuario) {

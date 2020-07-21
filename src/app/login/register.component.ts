@@ -15,7 +15,7 @@ declare function init_plugins();
   styleUrls: ['./login.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  
+
   forma: FormGroup;
 
   constructor(public _usuarioService: UsuarioService, public router: Router) {}
@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
 
     console.log('forma:  ', this.forma);
     console.log('forma valida:  ', this.forma.valid);
-    console.log(this.forma.value); // verificar el formulario entren los datos
+    console.log('verificar usuario completo desde registrar - register: ', this.forma.value); // verificar el formulario entren los datos
 
     let usuario = new Usuario(
       this.forma.value.nombre,

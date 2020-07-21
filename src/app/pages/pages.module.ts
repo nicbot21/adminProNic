@@ -13,6 +13,8 @@ import { ChartsModule } from 'ng2-charts';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
+
 
 
 
@@ -42,6 +44,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
      PAGES_ROUTES,
      FormsModule,
      ChartsModule,
+     PipesModule
     ]
 })
 
