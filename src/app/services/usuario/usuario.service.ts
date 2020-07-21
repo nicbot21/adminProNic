@@ -29,7 +29,7 @@ export class UsuarioService {
     if (localStorage.getItem('token')) {
       var user = JSON.stringify(this.usuario); // no pasa hay error - usuario undefined
       this.token = localStorage.getItem('token');
-      //this.usuario = JSON.parse(localStorage.getItem('usuario')); corregir!!!!!!!!
+     // this.usuario = JSON.parse(localStorage.getItem('usuario'));// corregir!!!!!!!!
     } else {
       this.token = '';
       this.usuario = null;
@@ -61,8 +61,8 @@ export class UsuarioService {
 
 
   /**
-   * 
-   * @param token 
+   *
+   * @param token
    */
 
   loginGoogle(token: String) {
