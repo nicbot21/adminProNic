@@ -22,16 +22,16 @@ export class ImagenPipe implements PipeTransform {
 
     //si no es https pero si son de las coleccioens usuario,medico y hosptiles
     switch (tipoTabla){
-      case 'usuario':
-        url += '/usuarios' + img;
+      case 'usuarios':
+        url += '/usuarios/' + img;
         break;
 
-      case 'medico':
-        url += '/medicos' + img;
+      case 'medicos':
+        url += '/medicos/' + img;
         break;
 
-      case 'hospital':
-         url += '/hospitales' + img;
+      case 'hospitales':
+         url += '/hospitales/' + img;
         break;
 
       default:

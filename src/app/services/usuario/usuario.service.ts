@@ -1,3 +1,4 @@
+import { SubirArchivoService } from './../../subir-archivo/subir-archivo.service';
 import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { HttpClient } from '@angular/common/http';
@@ -14,11 +15,12 @@ import { Router } from '@angular/router';
 })
 export class UsuarioService {
   usuario: Usuario;
-  token: String;
+  token: string;
 
   constructor(
     public http: HttpClient,
-     public router: Router
+     public router: Router,
+     public _subirArchivoService: SubirArchivoService
      ) {
     console.log('Service ok');
     this.cargarStorage();
@@ -33,7 +35,7 @@ export class UsuarioService {
       var user = JSON.stringify(this.usuario); // no pasa hay error - usuario undefined
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse(localStorage.getItem('usuario'));// corregir!!!!!!!!
-     console.log('verificar usuario en usuario.service: - cargarUsuario', this.usuario)
+     //console.log('verificar usuario en usuario.service: - cargarUsuario', this.usuario)
     } else {
       this.token = '';
       this.usuario = null;
@@ -90,13 +92,18 @@ export class UsuarioService {
     return this.http.post(url, usuario).pipe(
       map((resp: any) => {
         this.guardarStorage(resp.id, resp.token, resp.usuario);
-        console.log('recibiendo usuario de usuario.service - login: ', resp);
+        //console.log('recibiendo usuario de usuario.service - login: ', resp);
         return true;
       })
 
     );
 
   }
+
+
+  //---------------------------------------------------------------
+  //------------  CRUD --------------------------------------------
+  //---------------------------------------------------------------
 
   crearUsuario(usuario: Usuario) {
     let url = URL_SERVICES + '/usuario';
@@ -109,5 +116,37 @@ export class UsuarioService {
         return response.usuario;
       })
     ); // importar map de rxjs dentro de un pipe*/
+  }
+
+
+  actualizarUsuario(usuario: Usuario){
+
+    let url = URL_SERVICES + '/usuario/' + usuario._id ;
+    url += '?token=' + this.token;
+    //var token: string = JSON.stringify(this.token);
+    //console.log('verificar actualizar  - usuario.service: ',url);
+    //console.log('usuario verify: ',token);
+    return this.http.put(url, usuario)
+                    .pipe(map( (response:any) => {
+                      //this.usuario = response.usuario;
+                      let usuarioDB: Usuario = response.usuario;
+                      this.guardarStorage( usuarioDB._id, this.token, usuarioDB);
+                      Swal.fire('Usuario actualizado correctamente', usuario.email, 'success');
+                      return true;
+                    }));
+  }
+
+  cambiarImagen( archivo: File, id: string){
+      this._subirArchivoService.subirArchivo( archivo, 'usuarios', id)
+                                .then( ( resp :any) => {
+                                  this.usuario.img = resp.usuario.img;
+                                  Swal.fire('Imagen de  ' + this.usuario.nombre + '  actualizada', this.usuario.email ,'success');
+                                  //GUARDAR EN STORAGE
+                                  this.guardarStorage(id, this.token, this.usuario);
+                                  console.log('subirArchivo se cambio imagen: ',resp);
+                                })
+                                .catch( resp => {
+                                  console.log('atrapa error subir archivo: ',resp);
+                                });
   }
 }

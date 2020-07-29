@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
     this.usuario = this._usuarioService.usuario;
 
-    console.log("verificar ------>",this.usuario);
+    //console.log("verificar ------>",this.usuario);
 
   }
 
